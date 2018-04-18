@@ -17,6 +17,7 @@ the deck container.
 
   var bindKeyEvents = function() {
     $document.unbind('keydown.deckgoto');
+    $document.unbind('keydown.gotoindex');
     $document.bind('keydown.deckgoto', function(event) {
       var key = $.deck('getOptions').keys.goto;
       if (event.which === key || $.inArray(event.which, key) > -1) {
@@ -24,6 +25,15 @@ the deck container.
         $.deck('toggleGoTo');
       }
     });
+    
+    $document.bind('keydown.gotoindex', function(event) {
+      var key = $.deck('getOptions').keys.gotoIndex;
+      if (event.which === key) {
+        event.preventDefault();
+        $.deck('go', 1);
+      }
+    })
+    
   };
 
   var populateDatalist = function() {
@@ -137,7 +147,8 @@ the deck container.
     },
 
     keys: {
-      goto: 71 // g
+      goto: 71, // g
+      gotoIndex: 67 // c
     },
 
     countNested: true
